@@ -6,6 +6,7 @@ from readers.models import Reader
 
 
 class ReaderForm(forms.ModelForm):
+    """ Валидатор для many2many books"""
     class Meta:
         model = Reader
         fields = ['first_name', 'last_name', 'phone_number', 'status', 'books']
