@@ -5,9 +5,9 @@ from authors.models import Author
 
 class Book(models.Model):
     title = models.CharField(max_length=150, blank=True)
-    description = models.CharField(max_length=2000, blank=True)
-    pages = models.SmallIntegerField()
-    total = models.SmallIntegerField()
+    description = models.TextField(max_length=2000, blank=True)
+    pages = models.PositiveIntegerField(blank=True)
+    total = models.PositiveIntegerField(blank=True)
     author = models.ManyToManyField(Author)
     created = models.DateTimeField(verbose_name="Дата создания", auto_now_add=True)
     updated = models.DateTimeField(verbose_name="Дата последнего обновления", auto_now=True)
