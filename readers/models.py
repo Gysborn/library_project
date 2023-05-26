@@ -19,3 +19,6 @@ class Reader(models.Model):
     def __str__(self):
         return self.last_name
 
+
+
+

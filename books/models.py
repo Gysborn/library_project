@@ -8,7 +8,7 @@ class Book(models.Model):
     description = models.TextField(max_length=2000, blank=True)
     pages = models.PositiveIntegerField(blank=True)
     total = models.PositiveIntegerField(blank=True)
-    author = models.ManyToManyField(Author)
+    author = models.ManyToManyField(Author, blank=True)
     created = models.DateTimeField(verbose_name="Дата создания", auto_now_add=True)
     updated = models.DateTimeField(verbose_name="Дата последнего обновления", auto_now=True)
 
