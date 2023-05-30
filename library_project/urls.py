@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-import settings
+from library_project import settings
 from authors.views import AuthorViewSet
 
 

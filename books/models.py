@@ -16,6 +16,11 @@ class Book(models.Model):
         verbose_name = 'Книга'
         verbose_name_plural = 'Книги'
 
+    # def display_authors(self): Функция для отображения many2many в админке
+    #     return "\n".join([str(a) for a in self.author.all()])
+    #
+    # display_authors.short_description = 'Авторы'
+
     def __str__(self):
         return self.title
 

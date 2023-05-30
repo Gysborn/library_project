@@ -16,8 +16,8 @@ class Reader(models.Model):
         verbose_name = 'Читатель'
         verbose_name_plural = 'Читатели'
 
-    def __str__(self):
-        return self.last_name
+    # def __str__(self):
+    #     return self.last_name
 
 
 
