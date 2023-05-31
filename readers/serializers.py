@@ -4,6 +4,18 @@ from books.models import Book
 from readers.models import Reader
 
 
+class PhoneNumberValidator:
+    def __init__(self):
+        pass
+
+    def __call__(self, value):
+        if not str(value).startswith('+7'):
+            raise serializers.ValidationError('Номер телефона должен начинаться с +7')
+
+        if len(value) != 12 or not str(value[1:]).isdigit():
+            raise serializers.ValidationError('Номер телефона должен состоять из 11 цифр')
+
+
 class ReaderSerializer(serializers.ModelSerializer):
     books = serializers.SlugRelatedField(read_only=True, slug_field='title', many=True)
 
@@ -19,15 +31,9 @@ class ReaderCreateSerializer(serializers.ModelSerializer):
         many=True,
         queryset=Book.objects.all()
     )
-
-    def validate(self, attrs):
-        phone = str(attrs.get('phone_number'))
-        if not phone.startswith('+7'):
-            raise ValidationError('Номер телефона должен начинаться с +7')
-        if len(phone) != 12 or not phone[1:].isdigit():
-            raise ValidationError('Номер телефона должен состоять из 11 цифр')
-
-        return super().validate(attrs)
+    phone_number = serializers.CharField(
+        max_length=12, validators=[PhoneNumberValidator()]
+    )
 
     class Meta:
         model = Reader
@@ -56,6 +62,10 @@ class ReaderCreateSerializer(serializers.ModelSerializer):
 
 
 class ReaderUpdateSerializer(serializers.ModelSerializer):
+    phone_number = serializers.CharField(
+        max_length=12, validators=[PhoneNumberValidator()]
+    )
+
     class Meta:
         model = Reader
         fields = '__all__'
