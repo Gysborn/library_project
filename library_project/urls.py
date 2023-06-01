@@ -4,20 +4,22 @@ from django.urls import path, include
 from rest_framework import routers
 
 from library_project import settings
-from authors.views import AuthorViewSet
-
+from authors.views import AuthorViewSet, AuthorUpdateCreateViewSet
 
 router_author = routers.SimpleRouter()
 router_author.register('author', AuthorViewSet)
+
+router = routers.SimpleRouter()
+router.register('create', AuthorUpdateCreateViewSet)
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('readers/', include(('readers.urls', 'readers'))),
     path('books/', include(('books.urls', 'books'))),
-
 ]
 
+urlpatterns += router.urls
 urlpatterns += router_author.urls
 
 if settings.DEBUG:
